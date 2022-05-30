@@ -1,0 +1,4 @@
+[workspace]
+members = [
+    "src/dscvr_takehome_rust",
+]

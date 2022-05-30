@@ -1,0 +1,36 @@
+//https://internetcomputer.org/docs/current/developer-docs/build/languages/candid/candid-intro/
+
+type User =
+    record {
+        id: principal;
+        username: text;
+    };
+
+type Post =
+    record {
+        id: nat64;
+        upvotes: nat64;
+        body: text;
+        owner_id: principal;
+    };
+
+type PostSort = 
+    variant {
+        Top;
+        New;
+    };
+
+type PostQuery =
+    record {
+        sort: PostSort;
+        page: nat64;
+        page_size: nat64;
+    };
+
+service : {
+    greet: (text) -> (text) query;
+    create_user: (username: text) -> (User);
+    list_users: () -> (vec User) query;
+    create_post: (body: text) -> (Post);
+    upvote_post: (post_id: nat64) -> (opt Post);
+}

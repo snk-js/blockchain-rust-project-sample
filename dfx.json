@@ -1,0 +1,36 @@
+{
+  "canisters": {
+    "dscvr_takehome_rust": {
+      "candid": "src/dscvr_takehome_rust/dscvr_takehome_rust.did",
+      "package": "dscvr_takehome_rust",
+      "type": "rust"
+    },
+    "dscvr_takehome_rust_assets": {
+      "dependencies": [
+        "dscvr_takehome_rust"
+      ],
+      "frontend": {
+        "entrypoint": "src/dscvr_takehome_rust_assets/src/index.html"
+      },
+      "source": [
+        "src/dscvr_takehome_rust_assets/assets",
+        "dist/dscvr_takehome_rust_assets/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "dfx": "0.9.3",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}
