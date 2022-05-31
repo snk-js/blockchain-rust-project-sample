@@ -33,4 +33,6 @@ service : {
     list_users: () -> (vec User) query;
     create_post: (body: text) -> (Post);
     upvote_post: (post_id: nat64) -> (opt Post);
+    list_posts: () -> (vec Post);
+    list_posts_by_user: (principal) -> (vec Post);
 }

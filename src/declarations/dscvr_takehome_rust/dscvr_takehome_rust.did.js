@@ -10,6 +10,8 @@ export const idlFactory = ({ IDL }) => {
     'create_post' : IDL.Func([IDL.Text], [Post], []),
     'create_user' : IDL.Func([IDL.Text], [User], []),
     'greet' : IDL.Func([IDL.Text], [IDL.Text], ['query']),
+    'list_posts' : IDL.Func([], [IDL.Vec(Post)], []),
+    'list_posts_by_user' : IDL.Func([IDL.Principal], [IDL.Vec(Post)], []),
     'list_users' : IDL.Func([], [IDL.Vec(User)], ['query']),
     'upvote_post' : IDL.Func([IDL.Nat64], [IDL.Opt(Post)], []),
   });

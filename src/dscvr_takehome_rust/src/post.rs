@@ -47,7 +47,14 @@ impl PostStore {
         return posts;   
     }
 
+    pub fn posts_by_user(&mut self, user_id: Principal) -> Vec<Post> {
+        let posts = self.posts.values().cloned().collect::<Vec<Post>>();
+        return posts.into_iter().filter(|p| p.owner_id == user_id).collect::<Vec<Post>>();
+    }
+
     pub fn upvote_post(&mut self, id: u64) -> Option<Post> {
+
+
         let post = self.posts.get(&id).cloned();
         if let Some(mut post) = post {
             post.upvotes += 1;

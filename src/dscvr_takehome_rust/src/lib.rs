@@ -4,6 +4,7 @@ use ic_cdk_macros::*;
 use post::{Post, PostQuery};
 use state::State;
 use user::User;
+use candid::{Principal};
 
 mod post;
 mod state;
@@ -38,12 +39,17 @@ pub fn create_post(body: String) -> Post {
 
 #[update]
 pub fn upvote_post(id: u64) -> Option<Post> {
+    // let caller = ic_cdk::caller();
     return STATE.with(|s| s.borrow_mut().post_store.upvote_post(id));
 }
 
 #[query]
 pub fn list_posts() -> Vec<Post> {
     return STATE.with(|s| s.borrow_mut().post_store.list());
+}
+#[query]
+pub fn list_posts_by_user(id: Principal) -> Vec<Post> {
+    return STATE.with(|s| s.borrow_mut().post_store.posts_by_user(id));
 }
 
 #[init]
