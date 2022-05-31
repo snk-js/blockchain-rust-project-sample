@@ -1,14 +1,14 @@
 ### Coding Challenge Guidelines
 
 - Implement post upvote
-  - This should take in a Post ID and apply a single upvote to the Post.
-  - What if the same user upvotes twice?
+  - [x] This should take in a Post ID and apply a single upvote to the Post.
+  - [ ] What if the same user upvotes twice?
 - Implement post list
-  - This should take in a PostQuery object and return an array of Posts relative to the query.
-  - How would you validate the input?
-  - Bonus: Implement a `Hot` sort using [this algorithm](https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9) or make your own.
+  - [x] This should take in a PostQuery object and return an array of Posts relative to the query.
+  - [ ] How would you validate the input?
+  - [ ] Bonus: Implement a `Hot` sort using [this algorithm](https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9) or make your own.
 - Implement posts by user
-  - This should take in a PostQuery and a username and return an array of Posts that are by that user.
+  - [ ] This should take in a PostQuery and a username and return an array of Posts that are by that user.
 
 ### Evaluation Criteria
 
