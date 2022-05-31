@@ -37,7 +37,7 @@ impl PostStore {
     }
 
     pub fn list(&mut self, /* query: PostQuery */) -> Vec<Post> {
-        let mut posts = self.posts.values().cloned().collect::<Vec<Post>>();
+        let posts = self.posts.values().cloned().collect::<Vec<Post>>();
         // posts.sort_by(|a, b| {
         //     match query.sort {
         //         PostSort::Top => b.upvotes.cmp(&a.upvotes),
@@ -45,6 +45,16 @@ impl PostStore {
         //     }
         // });
         return posts;   
+    }
+
+    pub fn upvote_post(&mut self, id: u64) -> Option<Post> {
+        let post = self.posts.get(&id).cloned();
+        if let Some(mut post) = post {
+            post.upvotes += 1;
+            self.posts.insert(id, post.clone());
+            return Some(post);
+        }
+        return None;
     }
 }
 

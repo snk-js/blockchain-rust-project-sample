@@ -38,7 +38,7 @@ pub fn create_post(body: String) -> Post {
 
 #[update]
 pub fn upvote_post(id: u64) -> Option<Post> {
-    return None;
+    return STATE.with(|s| s.borrow_mut().post_store.upvote_post(id));
 }
 
 #[query]
