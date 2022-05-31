@@ -1,7 +1,7 @@
 use crate::state::STATE;
 use ic_cdk::storage;
 use ic_cdk_macros::*;
-use post::{Post, PostQuery};
+use post::{Post};
 use state::State;
 use user::User;
 use candid::{Principal};

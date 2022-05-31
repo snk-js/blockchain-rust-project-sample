@@ -1,5 +1,7 @@
 ### Coding Challenge Guidelines
 
+> I toke one day learning about the SDK, the framework itself, and some critical knowledge about Rust, and honestly, GitHub Copilot helped me more than I expected on those easy tasks. But, I reached my limit, undoubtedly wondering how to implement those other things flawlessly since Rust doesn't allow you to be imperfect.
+
 - Implement post upvote
   - [x] This should take in a Post ID and apply a single upvote to the Post.
   - [ ] What if the same user upvotes twice?
@@ -8,7 +10,7 @@
   - [ ] How would you validate the input?
   - [ ] Bonus: Implement a `Hot` sort using [this algorithm](https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9) or make your own.
 - Implement posts by user
-  - [ ] This should take in a PostQuery and a username and return an array of Posts that are by that user.
+  - [x] This should take in a PostQuery and a username and return an array of Posts that are by that user.
 
 ### Evaluation Criteria
 

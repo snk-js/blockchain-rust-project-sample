@@ -36,14 +36,8 @@ impl PostStore {
         return post;
     }
 
-    pub fn list(&mut self, /* query: PostQuery */) -> Vec<Post> {
+    pub fn list(&mut self) -> Vec<Post> {
         let posts = self.posts.values().cloned().collect::<Vec<Post>>();
-        // posts.sort_by(|a, b| {
-        //     match query.sort {
-        //         PostSort::Top => b.upvotes.cmp(&a.upvotes),
-        //         PostSort::New => a.id.cmp(&b.id),
-        //     }
-        // });
         return posts;   
     }
 
