@@ -22,6 +22,7 @@ pub struct PostQuery {
     page_size: u64,
 }
 
+
 #[derive(CandidType, Deserialize)]
 pub enum PostSort {
     Top,
@@ -33,6 +34,17 @@ impl PostStore {
         let post = Post::new(id, body, owner_id);
         self.posts.insert(id, post.clone());
         return post;
+    }
+
+    pub fn list(&mut self, /* query: PostQuery */) -> Vec<Post> {
+        let mut posts = self.posts.values().cloned().collect::<Vec<Post>>();
+        // posts.sort_by(|a, b| {
+        //     match query.sort {
+        //         PostSort::Top => b.upvotes.cmp(&a.upvotes),
+        //         PostSort::New => a.id.cmp(&b.id),
+        //     }
+        // });
+        return posts;   
     }
 }
 

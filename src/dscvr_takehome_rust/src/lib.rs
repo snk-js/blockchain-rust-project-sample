@@ -42,8 +42,8 @@ pub fn upvote_post(id: u64) -> Option<Post> {
 }
 
 #[query]
-pub fn list_posts(query: PostQuery) -> Vec<Post> {
-    return Vec::new();
+pub fn list_posts() -> Vec<Post> {
+    return STATE.with(|s| s.borrow_mut().post_store.list());
 }
 
 #[init]
