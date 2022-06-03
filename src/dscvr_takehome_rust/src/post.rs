@@ -11,6 +11,7 @@ pub struct PostStore {
 pub struct Post {
     id: u64,
     upvotes: u64,
+    voted_by: Vec<Option<String>>,
     body: String,
     owner_id: Principal,
 }
@@ -30,8 +31,8 @@ pub enum PostSort {
 }
 
 impl PostStore {
-    pub fn create_post(&mut self, id: u64, body: String, owner_id: Principal) -> Post {
-        let post = Post::new(id, body, owner_id);
+    pub fn create_post(&mut self, id: u64, body: String, owner_id: Principal, voted_by: Option<Vec<Option<String>>>) -> Post {
+        let post = Post::new(id, body, owner_id, voted_by);
         self.posts.insert(id, post.clone());
         return post;
     }
@@ -47,23 +48,27 @@ impl PostStore {
     }
 
     pub fn upvote_post(&mut self, id: u64) -> Option<Post> {
-
-
         let post = self.posts.get(&id).cloned();
         if let Some(mut post) = post {
+            if post.voted_by.contains(&Some(ic_cdk::caller().to_string())) {
+                // inform!(post, "You already voted for this post.");
+                return None
+            }
             post.upvotes += 1;
-            self.posts.insert(id, post.clone());
+            post.voted_by.push(Some(ic_cdk::caller().to_string()));
             return Some(post);
         }
-        return None;
+        // inform!(None, "No post with id {} found.", id);  
+        return None
     }
 }
 
 impl Post {
-    pub fn new(id: u64, body: String, owner_id: Principal) -> Post {
+    pub fn new(id: u64, body: String, owner_id: Principal, _voted_by:Option<Vec<Option<String>>>) -> Post {
         return Post {
             id,
             body,
+            voted_by: vec![],   
             owner_id,
             upvotes: 0,
         };

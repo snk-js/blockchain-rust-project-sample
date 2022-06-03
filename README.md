@@ -4,7 +4,7 @@
 
 - Implement post upvote
   - [x] This should take in a Post ID and apply a single upvote to the Post.
-  - [ ] What if the same user upvotes twice?
+  - [x] What if the same user upvotes twice?
 - Implement post list
   - [x] This should take in a PostQuery object and return an array of Posts relative to the query.
   - [ ] How would you validate the input?

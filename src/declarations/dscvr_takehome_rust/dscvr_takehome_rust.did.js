@@ -2,6 +2,7 @@ export const idlFactory = ({ IDL }) => {
   const Post = IDL.Record({
     'id' : IDL.Nat64,
     'upvotes' : IDL.Nat64,
+    'voted_by' : IDL.Vec(IDL.Opt(IDL.Text)),
     'body' : IDL.Text,
     'owner_id' : IDL.Principal,
   });

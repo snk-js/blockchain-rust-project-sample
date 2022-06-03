@@ -10,6 +10,7 @@ type Post =
     record {
         id: nat64;
         upvotes: nat64;
+        voted_by: vec opt text;
         body: text;
         owner_id: principal;
     };

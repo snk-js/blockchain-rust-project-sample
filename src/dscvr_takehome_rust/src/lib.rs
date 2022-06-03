@@ -1,3 +1,5 @@
+use std::vec;
+
 use crate::state::STATE;
 use ic_cdk::storage;
 use ic_cdk_macros::*;
@@ -33,7 +35,7 @@ pub fn create_post(body: String) -> Post {
         state.global_index += 1;
 
         let idx = state.global_index.clone();
-        return state.post_store.create_post(idx, body, ic_cdk::caller());
+        return state.post_store.create_post(idx, body, ic_cdk::caller(), Some(vec![Some("string".to_string())]));
     });
 }
 

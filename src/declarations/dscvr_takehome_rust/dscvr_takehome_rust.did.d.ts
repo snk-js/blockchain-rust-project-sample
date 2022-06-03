@@ -2,6 +2,7 @@ import type { Principal } from '@dfinity/principal';
 export interface Post {
   'id' : bigint,
   'upvotes' : bigint,
+  'voted_by' : Array<[] | [string]>,
   'body' : string,
   'owner_id' : Principal,
 }
