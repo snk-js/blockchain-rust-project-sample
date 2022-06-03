@@ -1,6 +1,8 @@
 use candid::{CandidType, Principal};
 use serde::Deserialize;
 use std::collections::HashMap;
+use std::slice::SliceIndex;
+
 
 #[derive(Default, CandidType, Deserialize)]
 pub struct PostStore {
@@ -18,9 +20,9 @@ pub struct Post {
 
 #[derive(CandidType, Deserialize)]
 pub struct PostQuery {
-    sort: PostSort,
-    page: u64,
-    page_size: u64,
+    pub sort: PostSort,
+    pub page: u64,
+    pub page_size: u64,
 }
 
 
@@ -37,9 +39,18 @@ impl PostStore {
         return post;
     }
 
-    pub fn list(&mut self) -> Vec<Post> {
-        let posts = self.posts.values().cloned().collect::<Vec<Post>>();
-        return posts;   
+    pub fn list(&mut self, PostQuery { sort, page, page_size }: PostQuery) -> Vec<Post> {
+        let mut posts: Vec<Post> = self.posts.values().cloned().collect::<Vec<Post>>();
+    
+
+        posts.sort_by(|a, b| {
+            match sort {
+                PostSort::Top => b.upvotes.cmp(&a.upvotes),
+                PostSort::New => a.id.cmp(&b.id),
+            }
+        });
+
+        return posts
     }
 
     pub fn posts_by_user(&mut self, user_id: Principal) -> Vec<Post> {

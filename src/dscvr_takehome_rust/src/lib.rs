@@ -3,7 +3,7 @@ use std::vec;
 use crate::state::STATE;
 use ic_cdk::storage;
 use ic_cdk_macros::*;
-use post::{Post};
+use post::{Post, PostSort, PostQuery};
 use state::State;
 use user::User;
 use candid::{Principal};
@@ -47,7 +47,7 @@ pub fn upvote_post(id: u64) -> Option<Post> {
 
 #[query]
 pub fn list_posts() -> Vec<Post> {
-    return STATE.with(|s| s.borrow_mut().post_store.list());
+    return STATE.with(|s| s.borrow_mut().post_store.list( PostQuery { sort: PostSort::Top, page: 0, page_size: 0 }));
 }
 #[query]
 pub fn list_posts_by_user(id: Principal) -> Vec<Post> {

@@ -1,7 +1,5 @@
 ### Coding Challenge Guidelines
 
-> I toke one day learning about the SDK, the framework itself, and some critical knowledge about Rust, and honestly, GitHub Copilot helped me more than I expected on those easy tasks. But, I reached my limit, undoubtedly wondering how to implement those other things flawlessly since Rust doesn't allow you to be imperfect.
-
 - Implement post upvote
   - [x] This should take in a Post ID and apply a single upvote to the Post.
   - [x] What if the same user upvotes twice?
