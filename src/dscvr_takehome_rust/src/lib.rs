@@ -51,7 +51,7 @@ pub fn list_posts() -> Vec<Post> {
 }
 #[query]
 pub fn list_posts_by_user(id: Principal) -> Vec<Post> {
-    return STATE.with(|s| s.borrow_mut().post_store.posts_by_user(id));
+    return STATE.with(|s| s.borrow_mut().post_store.posts_by_user(id, PostQuery { sort: PostSort::Top, page: 0, page_size: 0 }));
 }
 
 #[init]

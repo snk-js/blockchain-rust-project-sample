@@ -42,7 +42,6 @@ impl PostStore {
     pub fn list(&mut self, PostQuery { sort, page, page_size }: PostQuery) -> Vec<Post> {
         let mut posts: Vec<Post> = self.posts.values().cloned().collect::<Vec<Post>>();
     
-
         posts.sort_by(|a, b| {
             match sort {
                 PostSort::Top => b.upvotes.cmp(&a.upvotes),
@@ -53,12 +52,20 @@ impl PostStore {
         return posts
     }
 
-    pub fn posts_by_user(&mut self, user_id: Principal) -> Vec<Post> {
-        let posts = self.posts.values().cloned().collect::<Vec<Post>>();
+    pub fn posts_by_user(&mut self, user_id: Principal, PostQuery { sort, page, page_size }: PostQuery) -> Vec<Post> {
+        let mut posts = self.posts.values().cloned().collect::<Vec<Post>>();
+
+        posts.sort_by(|a, b| {
+            match sort {
+                PostSort::Top => b.upvotes.cmp(&a.upvotes),
+                PostSort::New => a.id.cmp(&b.id),
+            }
+        });
+
         return posts.into_iter().filter(|p| p.owner_id == user_id).collect::<Vec<Post>>();
     }
 
-    pub fn upvote_post(&mut self, id: u64) -> Option<Post> {
+    pub fn upvote_post(&mut self, id: u64, ) -> Option<Post> {
         let post = self.posts.get(&id).cloned();
         if let Some(mut post) = post {
             if post.voted_by.contains(&Some(ic_cdk::caller().to_string())) {
