@@ -4,6 +4,7 @@ export interface Post {
   'upvotes' : bigint,
   'voted_by' : Array<[] | [string]>,
   'body' : string,
+  'created_at' : [] | [bigint],
   'owner_id' : Principal,
 }
 export interface PostQuery {

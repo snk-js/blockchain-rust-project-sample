@@ -13,6 +13,7 @@ type Post =
         voted_by: vec opt text;
         body: text;
         owner_id: principal;
+        created_at: opt nat64;
     };
 
 type PostSort = 

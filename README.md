@@ -5,8 +5,9 @@
   - [x] What if the same user upvotes twice?
 - Implement post list
   - [x] This should take in a PostQuery object and return an array of Posts relative to the query.
-  - [ ] How would you validate the input? `didn't get this`
-  - [ ] Bonus: Implement a `Hot` sort using [this algorithm](https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9) or make your own.
+  - [x] How would you validate the input?
+        `didn't get this, isn't the input already validated by the rust runtime and compiler?`
+  - [x] Bonus: Implement a `Hot` sort using [this algorithm](https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9) or make your own.
 - Implement posts by user
   - [x] This should take in a PostQuery and a username and return an array of Posts that are by that user.
 

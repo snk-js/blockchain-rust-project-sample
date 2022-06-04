@@ -1,9 +1,11 @@
 use candid::{CandidType, Principal};
 use serde::Deserialize;
 use std::collections::HashMap;
-use std::slice::SliceIndex;
-
-
+use chrono::{DateTime, Utc};
+// how to import this properly ?
+// according to this repo https://github.com/proxy-wasm/proxy-wasm-rust-sdk/blob/c94f6e4e822d34b5d898e5f078079165805c12fa/examples/hello_world.rs
+use proxy_wasm::traits::*;
+use proxy_wasm::types::*;
 #[derive(Default, CandidType, Deserialize)]
 pub struct PostStore {
     posts: HashMap<u64, Post>,
@@ -16,6 +18,7 @@ pub struct Post {
     voted_by: Vec<Option<String>>,
     body: String,
     owner_id: Principal,
+    created_at: i64,
 }
 
 #[derive(CandidType, Deserialize)]
@@ -34,7 +37,8 @@ pub enum PostSort {
 
 impl PostStore {
     pub fn create_post(&mut self, id: u64, body: String, owner_id: Principal, voted_by: Option<Vec<Option<String>>>) -> Post {
-        let post = Post::new(id, body, owner_id, voted_by);
+        let now = proxy_wasm::hostcalls::get_current_time();
+        let post = Post::new(id, body, owner_id, voted_by, now);
         self.posts.insert(id, post.clone());
         return post;
     }
@@ -82,13 +86,14 @@ impl PostStore {
 }
 
 impl Post {
-    pub fn new(id: u64, body: String, owner_id: Principal, _voted_by:Option<Vec<Option<String>>>) -> Post {
+    pub fn new(id: u64, body: String, owner_id: Principal, _voted_by:Option<Vec<Option<String>>>, created_at: i64) -> Post {
         return Post {
             id,
             body,
             voted_by: vec![],   
             owner_id,
             upvotes: 0,
+            created_at: created_at,
         };
     }
 }

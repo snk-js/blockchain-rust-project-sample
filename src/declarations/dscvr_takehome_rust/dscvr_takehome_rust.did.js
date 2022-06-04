@@ -4,6 +4,7 @@ export const idlFactory = ({ IDL }) => {
     'upvotes' : IDL.Nat64,
     'voted_by' : IDL.Vec(IDL.Opt(IDL.Text)),
     'body' : IDL.Text,
+    'created_at' : IDL.Opt(IDL.Nat64),
     'owner_id' : IDL.Principal,
   });
   const User = IDL.Record({ 'id' : IDL.Principal, 'username' : IDL.Text });
